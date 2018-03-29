@@ -3,18 +3,11 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 
 class Container extends Component {
-    state = {
-      lat: 51.505,
-      lng: -0.09,
-      zoom: 13,
-    }
-  // handleSubmit = e => {
-    
-  // }
+ 
     render() {
-      const position = [this.state.lat, this.state.lng]
+      const position = [this.props.lat, this.props.lng]
       return (
-        <Map className="Map--sizing" center={position} zoom={this.state.zoom}>
+        <Map className="Map--sizing" center={position} zoom={this.props.zoom}>
           <TileLayer
             attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import Container from './Container';
 import './App.css';
+import { getLocationByZip } from './services/location';
 
 class App extends Component {
   state = {
-    zip: ''
+    zip: 32601,
+    lat: 0,
+    lng: 0,
+    zoom: 13
   }
-  handleZipChange(e) {
+  handleZipChange = e => {
     this.setState({
       zip: +e.target.value
     });
+  }
+  handleSubmit = e => {
+    e.preventDefault();
+    getLocationByZip(this.state.zip)
+      .then(resp => {
+        this.setState({lat: resp.lat, lng: resp.lng})
+      })
   }
 
   // handleLatChange(e) {
@@ -26,7 +37,7 @@ class App extends Component {
 
   // handleSubmit(e) {
   //   e.preventDefault();
-    // getWeatherByZip(this.state.zip)
+    // getLocationByZip(this.state.zip)
     //   .then(response => {
     //     const dailyWeather = response.data.daily;
     //     this.setState({
@@ -46,7 +57,7 @@ class App extends Component {
     // }
     return (
       <div>
-        <Container />
+        <Container {...this.state}/>
         <form onSubmit={(e) => this.handleSubmit(e)}>
         <input type="text"
                  maxLength="5"
