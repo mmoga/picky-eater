@@ -12,6 +12,23 @@ export const getLocationByZip = (zipcode) => {
         })
 }
 
+export const geoLocateMe = () => {
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            reject('You turned me down :-(');
+        }
+        navigator.geolocation.getCurrentPosition(function success(pos){
+            const {latitude, longitude } = pos.coords;
+            resolve({
+                lat: latitude,
+                lng: longitude
+            })
+        }, function error(err){
+            reject(err);
+        })
+    });
+}
+
 
 
 

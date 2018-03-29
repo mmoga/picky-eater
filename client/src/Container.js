@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
-
 class Container extends Component {
  
     render() {
@@ -23,6 +22,7 @@ class Container extends Component {
       )
     }
   }
+Container.defaultProps = {lat: 40.7127837, lng: -74.00594130000002, zoom: 13}
 
   export default Container;
 
