@@ -15,7 +15,7 @@ class Container extends Component {
           <Marker position={position}>
             <Popup>
               <span>
-                A pretty CSS3 popup. <br /> Easily customizable.
+                I'm a marker. <br /> Suck it.
               </span>
             </Popup>
           </Marker>

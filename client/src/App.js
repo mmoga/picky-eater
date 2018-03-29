@@ -23,34 +23,6 @@ class App extends Component {
       })
   }
 
-  // handleLatChange(e) {
-  //   this.setState({
-  //     lat: +e.target.value
-  //   });
-  // }
-
-  // handleLonChange(e) {
-  //   this.setState({
-  //     lon: +e.target.value
-  //   })
-  // }
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-    // getLocationByZip(this.state.zip)
-    //   .then(response => {
-    //     const dailyWeather = response.data.daily;
-    //     this.setState({
-    //       dailyWeather: dailyWeather
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //     this.setState({
-    //       error: "Something is broken"
-    //     });
-    //   });
-  // }
   render() {
     // if (!this.props.loaded) {
     //   return <div>Loading...</div>
