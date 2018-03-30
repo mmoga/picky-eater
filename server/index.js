@@ -1,8 +1,9 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path');
 
 require('dotenv').config();
-const { GOOGLE_API_KEY } = process.env;
+const { GOOGLE_API_KEY, YELP_API_KEY } = process.env;
 
 const serverApp = express();
 const port = process.env.PORT || 5000;
@@ -24,6 +25,25 @@ serverApp.get('/geocode/:zipcode', function(request, response) {
             })
         });
 });
+
+serverApp.get('/term/:searchTerm/:lat/:lng', function(request, response) {
+    const { searchTerm } = request.params;
+    const { lat } = request.params;
+    const { lng} = request.params;
+    const url = `https://api.yelp.com/v3/businesses/search?term=${searchTerm}&latitude=${lat}&longitude=${lng}`;
+    const config = {
+        headers: {'Authorization':`Bearer ${YELP_API_KEY}`}
+    };
+    axios.get(url, config)
+        .then(res => {
+            response.status(200).json(res.data);
+        })
+        .catch(err => {
+            response.status(500).json({
+                msg: 'No term search ability. Sorry'
+            })
+        })
+})
 
 //this serves the finished React app
 serverApp.get('*', (request, response) => {

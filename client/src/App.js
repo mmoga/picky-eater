@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
 import Container from './Container';
 import './App.css';
-import { getLocationByZip, geoLocateMe } from './services/location';
+import { getLocationByZip, geoLocateMe, getPlaceCoords } from './services/location';
 
 class App extends Component {
   state = {
     zip: '',
-    lat: 0,
-    lng: 0,
-    zoom: 13
+    lat: 40.7127837,
+    lng: -74.00594130000002,
+    zoom: 13,
+    searchTerm: '',
+    placeLat: '',
+    placeLng: ''
   }
+
   handleZipChange = e => {
     this.setState({
       zip: +e.target.value
     });
   }
+
+  handleTermChange = e => {
+    this.setState({
+      searchTerm: e.target.value
+    });
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     getLocationByZip(this.state.zip)
@@ -30,6 +41,14 @@ geoLocate = e => {
   .catch(err => {
     console.error(err);
   })
+}
+
+handleTermSearch = e => {
+  e.preventDefault();
+  getPlaceCoords(this.state.searchTerm, this.state.lat, this.state.lng)
+    .then(resp => {
+      this.setState({placeLat: resp.placeLat, placeLng: resp.placeLng})
+    })
 }
 
   render() {
@@ -48,6 +67,13 @@ geoLocate = e => {
           <button className="submit-btn" type="submit">Set Location</button>
         </form>
         <button onClick={this.geoLocate}>Do it for me</button>
+        <form onSubmit={this.handleTermSearch}>
+        <input type="text"
+              placeholder='Enter search term'
+              value={this.state.searchTerm}
+              onChange={this.handleTermChange} />
+          <button className='submit-btn' type='submit'>Look it up!</button>
+        </form>
       </div>
     );
   }

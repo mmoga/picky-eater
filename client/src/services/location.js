@@ -29,6 +29,18 @@ export const geoLocateMe = () => {
     });
 }
 
+export const getPlaceCoords = (searchTerm, lat, lng) => {
+    const url = `/term/${searchTerm}/${lat}/${lng}`;
+    return axios.get(url)
+        .then(resp => {
+            // need to grab names and lat/lng of results to show on map
+            const placeLat = null;
+            const placeLng = null;
+            return {
+                placeLat, placeLng
+            }
+        })
+}
 
 
 
