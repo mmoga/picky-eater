@@ -33,8 +33,12 @@ export const getPlaceCoords = (searchTerm, lat, lng) => {
     const url = `/term/${searchTerm}/${lat}/${lng}`;
     return axios.get(url)
         .then(resp => {
-            // need to grab names and lat/lng of results to show on map
-            const placeLat = null;
+            // need to grab names and lat/lng of results to show on map.
+            // would a for-in loop be necessary to grab all the lat/lng of 
+            // the listed businesses? This would be required so I can have
+            // markers show (like on typical Yelp searches) the locations
+            // of restaurants that fit the search
+            const placeLat = resp.businesses["0"].coordinates.latitude; // this doesn't work
             const placeLng = null;
             return {
                 placeLat, placeLng

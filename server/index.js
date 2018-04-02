@@ -28,8 +28,9 @@ serverApp.get('/geocode/:zipcode', function(request, response) {
 
 serverApp.get('/term/:searchTerm/:lat/:lng', function(request, response) {
     const { searchTerm } = request.params;
+    // these need to come from whatever the state is in App.js 
     const { lat } = request.params;
-    const { lng} = request.params;
+    const { lng } = request.params;
     const url = `https://api.yelp.com/v3/businesses/search?term=${searchTerm}&latitude=${lat}&longitude=${lng}`;
     const config = {
         headers: {'Authorization':`Bearer ${YELP_API_KEY}`}
