@@ -76,6 +76,11 @@ handleTermSearch = e => {
           </form>
         </div>
         <Container className="Container--Map" {...this.state}/>
+        <ul>
+          <li>Pick for me!</li>
+          <li>Choices</li>
+          <li>AntiChoices</li>
+        </ul>
       </div>
     );
   }
