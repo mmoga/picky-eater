@@ -2,4 +2,31 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: rgb(241, 241, 241);
+}
+
+.App--searchbar {
+  display: flex;
+  padding: 5px;
+  background-color: lightgrey;
+  align-items: center;
+  justify-content: center;
+}
+
+.App--searchbar form {
+  margin-right: 10px;
+}
+
+.App--searchbar .geo-btn {
+  margin-right: 10px;
+  background-color: blue;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.Map--sizing {
+  width: 80% !important;
+  margin: 0 auto;
+  border-radius: 20px;
+  border: 1px lightslategrey solid;
 }

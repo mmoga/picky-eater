@@ -8,7 +8,7 @@ class App extends Component {
     zip: '',
     lat: 40.7127837,
     lng: -74.00594130000002,
-    zoom: 13,
+    zoom: 14,
     searchTerm: '',
     placeLat: '',
     placeLng: ''
@@ -57,23 +57,25 @@ handleTermSearch = e => {
     // }
     return (
       <div>
-        <Container {...this.state}/>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-        <input type="text"
-                 maxLength="5"
-                 value={this.state.zip}
-                 onChange={this.handleZipChange}
-                 placeholder="Enter zip code"/>
-          <button className="submit-btn" type="submit">Set Location</button>
-        </form>
-        <button onClick={this.geoLocate}>Do it for me</button>
-        <form onSubmit={this.handleTermSearch}>
-        <input type="text"
-              placeholder='Enter search term'
-              value={this.state.searchTerm}
-              onChange={this.handleTermChange} />
-          <button className='submit-btn' type='submit'>Look it up!</button>
-        </form>
+        <div className="App--searchbar">
+          <form onSubmit={(e) => this.handleSubmit(e)}>
+          <input type="text"
+                   maxLength="5"
+                   value={this.state.zip}
+                   onChange={this.handleZipChange}
+                   placeholder="Enter zip code"/>
+            <button className="submit-btn" type="submit">Set Location</button>
+          </form>
+          <button onClick={this.geoLocate} className="geo-btn">Do it for me</button>
+          <form onSubmit={this.handleTermSearch}>
+          <input type="text"
+                placeholder='Enter search term'
+                value={this.state.searchTerm}
+                onChange={this.handleTermChange} />
+            <button className='submit-btn' type='submit'>Look it up!</button>
+          </form>
+        </div>
+        <Container className="Container--Map" {...this.state}/>
       </div>
     );
   }
