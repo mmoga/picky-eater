@@ -52,10 +52,14 @@ handleTermSearch = e => {
   getBusinessInfo(this.state.searchTerm, this.state.lat, this.state.lng)
     .then(resp => {
       resp.data.businesses.map((business) => {
-        console.log(business.name);
-        console.log(business.coordinates.latitude);
-        console.log(business.coordinates.longitude);
+        newBusinesses.push({
+          name: business.name,
+          lat: business.coordinates.latitude,
+          lng: business.coordinates.longitude
+        })
+        return null;
       })
+      this.setState({businesses: newBusinesses});
     })
     .catch(err => {
       console.log(err);
