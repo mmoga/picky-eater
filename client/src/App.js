@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Container from './Container';
 import './App.css';
-import { getLocationByZip, geoLocateMe, getPlaceCoords } from './services/location';
+import { 
+  getLocationByZip, 
+  geoLocateMe,
+  getBusinessInfo } from './services/location';
+
 
 class App extends Component {
   state = {
@@ -10,8 +14,7 @@ class App extends Component {
     lng: -74.00594130000002,
     zoom: 14,
     searchTerm: '',
-    placeLat: '',
-    placeLng: ''
+    businesses: []
   }
 
   handleZipChange = e => {
@@ -45,11 +48,20 @@ geoLocate = e => {
 
 handleTermSearch = e => {
   e.preventDefault();
-  getPlaceCoords(this.state.searchTerm, this.state.lat, this.state.lng)
+  const newBusinesses = [];
+  getBusinessInfo(this.state.searchTerm, this.state.lat, this.state.lng)
     .then(resp => {
-      this.setState({placeLat: resp.placeLat, placeLng: resp.placeLng})
+      resp.data.businesses.map((business) => {
+        console.log(business.name);
+        console.log(business.coordinates.latitude);
+        console.log(business.coordinates.longitude);
+      })
+    })
+    .catch(err => {
+      console.log(err);
     })
 }
+
 
   render() {
     // if (!this.props.loaded) {
