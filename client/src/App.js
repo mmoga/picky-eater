@@ -51,11 +51,13 @@ handleTermSearch = e => {
   
   getBusinessInfo(this.state.searchTerm, this.state.lat, this.state.lng)
     .then(resp => {
-      const newBusinesses = resp.data.businesses.map((business) => ({
+      const newBusinesses = resp.data.businesses.map((business, index) => ({
           name: business.name,
           lat: business.coordinates.latitude,
           lng: business.coordinates.longitude,
-          id: business.id
+          id: business.id,
+          isLiked: null,
+          index: index
       }))
       this.setState({businesses: newBusinesses});
     })
@@ -63,6 +65,21 @@ handleTermSearch = e => {
       console.log(err);
     })
 }
+
+handleLike = (isLiked, index) => {
+  console.log(index);
+  const likedPlace = this.state.businesses[index];
+  const first = this.state.businesses.slice(0, index);
+  const last = this.state.businesses.slice(index + 1);
+  const newBusiness = [
+    ...first,
+    {...likedPlace, isLiked: isLiked},
+    ...last
+  ];
+  this.setState({'businesses': newBusiness});
+  console.log(likedPlace);
+}
+
 
 
   render() {
@@ -89,7 +106,7 @@ handleTermSearch = e => {
             <button className='submit-btn' type='submit'>Look it up!</button>
           </form>
         </div>
-        <Container className="Container--Map" {...this.state}/>
+        <Container className="Container--Map" {...this.state} handleLike={this.handleLike}/>
         <ul>
           <li>Pick for me!</li>
           <li>Choices</li>

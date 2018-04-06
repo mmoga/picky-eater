@@ -3,22 +3,15 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 
 class Container extends Component {
-  onLikeEvent = e => {
-    console.log('like!');
-  }
-
-  onDislikeEvent = e => {
-    console.log('dislike!');
-  }
-
+  
     render() {
       const markers = this.props.businesses.map((business) => 
-      <Marker key={business.id} position={[business.lat, business.lng]}>
+      <Marker key={business.id} position={[business.lat, business.lng]} isLiked={business.isLiked}>
         <Popup>
           <span className="Popup--info">
-            <img onClick={this.onDislikeEvent} src="https://icon.now.sh/thumb_down" alt="I dislike it"/>
+            <img onClick={() => {this.props.handleLike(false, business.index)}} src="https://icon.now.sh/thumb_down/" alt="I dislike it"/>
             <h1>{business.name}</h1>
-            <img onClick={this.onLikeEvent} src="https://icon.now.sh/thumb_up" alt="I like it"/>
+            <img onClick={() => {this.props.handleLike(true, business.index)}} src="https://icon.now.sh/thumb_up" alt="I like it"/>
           </span>
         </Popup>
       </Marker>
