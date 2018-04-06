@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import thumbsUp from './images/thumbs-up.png';
+import thumbsDown from './images/thumbs-down.png';
 
 class Container extends Component {
  
     render() {
-    //  const markerPlacer = e => {
       const markers = this.props.businesses.map((business) => 
       <Marker key={business.id} position={[business.lat, business.lng]}>
         <Popup>
-          <span>
+          <span className="Popup--info">
+            <img src={thumbsDown} alt="I dislike it"/>
             <h2>{business.name}</h2>
+            <img src={thumbsUp} alt="I like it"/>
           </span>
         </Popup>
       </Marker>
     )
-      // };
-      // markerPlacer();
       const position = [this.props.lat, this.props.lng]
       return (
         <Map className="Map--sizing" center={position} zoom={this.props.zoom}>
@@ -24,13 +25,6 @@ class Container extends Component {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {markers}
-          {/* <Marker position={position}>
-            <Popup>
-              <span>
-                I'm a marker. <br /> Suck it.
-              </span>
-            </Popup>
-          </Marker> */}
         </Map>
       )
     }

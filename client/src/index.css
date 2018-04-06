@@ -30,3 +30,16 @@ body {
   border-radius: 20px;
   border: 1px lightslategrey solid;
 }
+
+.Popup--info {
+  display: inline-flex;
+}
+
+.Popup--info h2 {
+  text-align: center;
+}
+
+.Popup--info img {
+  /* width: 2em; */
+  height: 6em;
+}
