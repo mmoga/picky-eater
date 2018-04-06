@@ -48,17 +48,15 @@ geoLocate = e => {
 
 handleTermSearch = e => {
   e.preventDefault();
-  const newBusinesses = [];
+  
   getBusinessInfo(this.state.searchTerm, this.state.lat, this.state.lng)
     .then(resp => {
-      resp.data.businesses.map((business) => {
-        newBusinesses.push({
+      const newBusinesses = resp.data.businesses.map((business) => ({
           name: business.name,
           lat: business.coordinates.latitude,
-          lng: business.coordinates.longitude
-        })
-        return null;
-      })
+          lng: business.coordinates.longitude,
+          id: business.id
+      }))
       this.setState({businesses: newBusinesses});
     })
     .catch(err => {
