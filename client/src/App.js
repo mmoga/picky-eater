@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import Container from './Container';
+import { 
+  Route,   
+  Link 
+} from 'react-router-dom';
 import './App.css';
 import { 
   getLocationByZip, 
   geoLocateMe,
-  getBusinessInfo } from './services/location';
+  getBusinessInfo 
+} from './services/location';
 import Choices from './Choices';
 
 class App extends Component {
@@ -106,11 +111,12 @@ handleLike = (isLiked, index) => {
             <button className='submit-btn' type='submit'>Look it up!</button>
           </form>
         </div>
-        <Container className="Container--Map" {...this.state} handleLike={this.handleLike}/>
-        <Choices {...this.state}/>
+        <Route exact path="/" render={(routerProps) => <Container className="Container--Map" {...this.state} handleLike={this.handleLike} {...routerProps}/>}/>
+        <Route exact path='/liked-places' render={(routerProps) => <Choices {...this.state} {...routerProps}/>} />
         <ul>
+          <li><Link to="/">Map</Link></li>
           <li>Pick for me!</li>
-          <li>Choices</li>
+          <li><Link to="/liked-places">Choices</Link></li>
           <li>AntiChoices</li>
         </ul>
       </div>
