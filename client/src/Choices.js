@@ -7,7 +7,7 @@ class Choices extends Component {
     render() {
         return (
             <div>
-                TEST
+                {JSON.stringify(this.props.businesses.filter(business => business.isLiked))}
             </div>
         )
     }

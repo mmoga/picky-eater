@@ -5,7 +5,7 @@ import {
   getLocationByZip, 
   geoLocateMe,
   getBusinessInfo } from './services/location';
-
+import Choices from './Choices';
 
 class App extends Component {
   state = {
@@ -57,9 +57,9 @@ handleTermSearch = e => {
           lng: business.coordinates.longitude,
           id: business.id,
           isLiked: null,
-          index: index
+          index: index + this.state.businesses.length
       }))
-      this.setState({businesses: newBusinesses});
+      this.setState({businesses: [...this.state.businesses, ...newBusinesses]});
     })
     .catch(err => {
       console.log(err);
@@ -107,6 +107,7 @@ handleLike = (isLiked, index) => {
           </form>
         </div>
         <Container className="Container--Map" {...this.state} handleLike={this.handleLike}/>
+        <Choices {...this.state}/>
         <ul>
           <li>Pick for me!</li>
           <li>Choices</li>

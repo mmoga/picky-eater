@@ -9,9 +9,9 @@ class Container extends Component {
       <Marker key={business.id} position={[business.lat, business.lng]} isLiked={business.isLiked}>
         <Popup>
           <span className="Popup--info">
-            <img onClick={() => {this.props.handleLike(false, business.index)}} src="https://icon.now.sh/thumb_down/" alt="I dislike it"/>
+            <img onClick={() => {this.props.handleLike(false, business.index)}} src={(business.isLiked === null) || business.isLiked  ? "https://icon.now.sh/thumb_down/" : "https://icon.now.sh/thumb_down/ff0000"} alt="I dislike it"/>
             <h1>{business.name}</h1>
-            <img onClick={() => {this.props.handleLike(true, business.index)}} src="https://icon.now.sh/thumb_up" alt="I like it"/>
+            <img onClick={() => {this.props.handleLike(true, business.index)}} src={business.isLiked ? "https://icon.now.sh/thumb_up/00ff00" : "https://icon.now.sh/thumb_up/"} alt="I like it"/>
           </span>
         </Popup>
       </Marker>
