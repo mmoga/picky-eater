@@ -35,6 +35,18 @@ body {
   text-decoration: none;
 }
 
+.App--pick-btn:hover {
+  border-bottom-color: transparent !important;
+}
+
+.App--pick-btn button {
+  padding: 10px;
+  background-color: #F67280;
+  color: #ffffff;
+  font-size: 1.4rem;
+  border-radius: 6px;
+}
+
 .App--searchbar {
   display: flex;
   padding: 5px;
@@ -68,7 +80,7 @@ body {
 }
 
 .App--searchbar input {
-  height: 1.5em;
+  height: 1.68em;
   font-size: 16px;
   border-radius: 6px;
   border: #355C7D 1px solid;

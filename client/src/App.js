@@ -83,6 +83,10 @@ class App extends Component {
     console.log(likedPlace);
   };
 
+  handlePicker = e => {
+    console.log('Launch popup!');
+  }
+
   render() {
     // if (!this.props.loaded) {
     //   return <div>Loading...</div>
@@ -140,7 +144,7 @@ class App extends Component {
             <li>
               <Link to="/">Map</Link>
             </li>
-            <li>Pick for me!</li>
+            <li className="App--pick-btn"><button onClick={this.handlePicker}>Pick for me!</button></li>
             <li>
               <Link to="/liked-places">Choices</Link>
             </li>
