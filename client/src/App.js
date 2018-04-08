@@ -8,6 +8,7 @@ import {
   getBusinessInfo
 } from "./services/location";
 import Choices from "./Choices";
+import AntiChoices from "./AntiChoices";
 
 class App extends Component {
   state = {
@@ -102,7 +103,7 @@ class App extends Component {
             </button>
           </form>
           <button onClick={this.geoLocate} className="geo-btn">
-            Do it for me
+            Use My Location
           </button>
           <form onSubmit={this.handleTermSearch}>
             <input
@@ -133,16 +134,19 @@ class App extends Component {
           path="/liked-places"
           render={routerProps => <Choices {...this.state} {...routerProps} />}
         />
-        <ul>
-          <li>
-            <Link to="/">Map</Link>
-          </li>
-          <li>Pick for me!</li>
-          <li>
-            <Link to="/liked-places">Choices</Link>
-          </li>
-          <li>AntiChoices</li>
-        </ul>
+        <Route exact path="/disliked-places" render={routerProps => <AntiChoices {...this.state} {...routerProps} />} />
+        <div className="App--navbar-container">
+          <ul className="App--navbar">
+            <li>
+              <Link to="/">Map</Link>
+            </li>
+            <li>Pick for me!</li>
+            <li>
+              <Link to="/liked-places">Choices</Link>
+            </li>
+            <li><Link to="/disliked-places">AntiChoices</Link></li>
+          </ul>
+        </div>
       </div>
     );
   }

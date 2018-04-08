@@ -8,7 +8,7 @@ class Choices extends Component {
     const likedChoices = this.props.businesses.map(
       business =>
         business.isLiked ? (
-          <div>
+          <div className="Choices--item">
             <p>{business.name}</p>
           </div>
         ) : (
@@ -17,7 +17,7 @@ class Choices extends Component {
     );
 
     return (
-      <div>
+      <div className="Choices">
         {/* {JSON.stringify(this.props.businesses.filter(business => business.isLiked))} */}
         {likedChoices}
       </div>

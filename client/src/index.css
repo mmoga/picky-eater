@@ -1,8 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   background-color: rgb(241, 241, 241);
+}
+
+.App--navbar-container {
+  background-color: darkgray;
+  display: flex;
+  justify-content: center;
+}
+
+.App--navbar ul {
+  list-style-type: none;
+}
+
+.App--navbar li {
+  color: white;
+  display: inline;
+  margin-right: 20px;
+  font-size: 18px;
+  padding: 5px;
+  border: transparent 3px solid;
+}
+
+.App--navbar li:hover {
+  border-bottom: #C06C84 3px solid;
+}
+
+.App--navbar a {
+  color: white;
+  text-decoration: none;
 }
 
 .App--searchbar {
@@ -17,11 +47,37 @@ body {
   margin-right: 10px;
 }
 
+.App--searchbar button, input {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.App--searchbar button {
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-left: 10px;
+}
+
 .App--searchbar .geo-btn {
-  margin-right: 10px;
-  background-color: blue;
+  margin-right: 30px;
+  margin-left: 20px;
+  padding: 8px;
+  background-color: #F67280;
   color: #ffffff;
   font-size: 1rem;
+}
+
+.App--searchbar input {
+  height: 1.5em;
+  font-size: 16px;
+  border-radius: 6px;
+  border: #355C7D 1px solid;
+  background-color: #6C5B7B;
+  color: #fff;
+}
+
+::placeholder {
+  color: rgb(216, 216, 216);
 }
 
 .Map--sizing {
@@ -42,4 +98,56 @@ body {
 .Popup--info img {
   padding: 0 5px;
   height: 6em;
+}
+
+.AntiChoices {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  border: black 2px solid;
+}
+
+.AntiChoices--item {
+  margin: 0 auto;
+  margin-top: 5px;
+  display: flex;
+  width: 60%;
+  justify-content: center;
+  background-color: rgb(55, 55, 121);
+  color: white;
+  box-shadow: rgb(0, 0, 68) 3px 4px 5px;
+}
+
+.AntiChoices--item p {
+  border-bottom: transparent 3px solid;
+}
+
+.AntiChoices--item p:hover {
+  border-bottom: rgb(129, 51, 129) 3px solid;
+}
+
+.Choices {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  border: black 2px solid;
+}
+
+.Choices--item {
+  margin: 0 auto;
+  margin-top: 5px;
+  display: flex;
+  width: 60%;
+  justify-content: center;
+  background-color: rgb(55, 55, 121);
+  color: white;
+  box-shadow: rgb(0, 0, 68) 3px 4px 5px;
+}
+
+.Choices--item p {
+  border-bottom: transparent 3px solid;
+}
+
+.Choices--item p:hover {
+  border-bottom: rgb(129, 51, 129) 3px solid;
 }
