@@ -5,14 +5,14 @@ import React, { Component } from "react";
 
 class Choices extends Component {
   render() {
-    const likedChoices = this.props.businesses.map(
+    const likedChoices = this.props.marked.map(
       business =>
         business.isLiked ? (
-          <div className="Choices--item">
+          <div className="Choices--item" key={business.id}>
             <p>{business.name}</p>
           </div>
         ) : (
-          <div />
+          null
         )
     );
 

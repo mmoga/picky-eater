@@ -17,7 +17,8 @@ class App extends Component {
     lng: -74.00594130000002,
     zoom: 14,
     searchTerm: "",
-    businesses: []
+    businesses: [],
+    marked: []
   };
 
   handleZipChange = e => {
@@ -58,10 +59,17 @@ class App extends Component {
           lng: business.coordinates.longitude,
           id: business.id,
           isLiked: null,
-          index: index + this.state.businesses.length
-        }));
+          index: index
+        })).map(business => {
+          const foundIndex = this.state.marked.findIndex(m => m.id === business.id);
+          return {
+            ...business,
+            ...this.state.marked[foundIndex],
+          }
+        })
+
         this.setState({
-          businesses: [...this.state.businesses, ...newBusinesses]
+          businesses: [...newBusinesses]
         });
       })
       .catch(err => {
@@ -76,16 +84,33 @@ class App extends Component {
     const last = this.state.businesses.slice(index + 1);
     const newBusiness = [
       ...first,
-      { ...likedPlace, isLiked: isLiked },
+      {...likedPlace, isLiked:isLiked},
       ...last
     ];
-    this.setState({ businesses: newBusiness });
+    const newMarked = [
+      ...this.state.marked,
+      {...likedPlace, isLiked:isLiked}
+    ]
+    this.setState({ businesses: newBusiness , marked: newMarked});
     console.log(likedPlace);
   };
 
   handlePicker = e => {
-    console.log('Launch popup!');
-  }
+    // console.log('Launch popup!');
+
+    // Right now, this will only display 'works' if the place drawn
+    // is liked. Not ideal as we need to run through only the
+    // liked places so it won't draw blanks
+    // maybe use a while loop
+    // const rand = this.state.businesses[
+    //   Math.floor(Math.random() * this.state.businesses.length)
+    // ];
+    // const randLiked = '';
+    // while (!rand.isLiked) {
+    //   randLiked = rand.
+    //   console.log("works");
+    // }
+  };
 
   render() {
     // if (!this.props.loaded) {
@@ -138,17 +163,27 @@ class App extends Component {
           path="/liked-places"
           render={routerProps => <Choices {...this.state} {...routerProps} />}
         />
-        <Route exact path="/disliked-places" render={routerProps => <AntiChoices {...this.state} {...routerProps} />} />
+        <Route
+          exact
+          path="/disliked-places"
+          render={routerProps => (
+            <AntiChoices {...this.state} {...routerProps} />
+          )}
+        />
         <div className="App--navbar-container">
           <ul className="App--navbar">
             <li>
               <Link to="/">Map</Link>
             </li>
-            <li className="App--pick-btn"><button onClick={this.handlePicker}>Pick for me!</button></li>
+            <li className="App--pick-btn">
+              <button onClick={this.handlePicker}>Pick for me!</button>
+            </li>
             <li>
               <Link to="/liked-places">Choices</Link>
             </li>
-            <li><Link to="/disliked-places">AntiChoices</Link></li>
+            <li>
+              <Link to="/disliked-places">AntiChoices</Link>
+            </li>
           </ul>
         </div>
       </div>

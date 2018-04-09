@@ -5,14 +5,14 @@ import React, { Component } from 'react';
 
 class AntiChoices extends Component {
     render() {
-        const dislikedChoices = this.props.businesses.map(
+        const dislikedChoices = this.props.marked.map(
           business =>
           business.isLiked != null && !business.isLiked ? (
-              <div className="AntiChoices--item">
+              <div className="AntiChoices--item" key={business.id}>
                 <p>{business.name}</p>
               </div>
             ) : (
-              <div />
+              null
             )
         );
     
