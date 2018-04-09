@@ -118,7 +118,12 @@ class App extends Component {
     // }
     return (
       <div>
-        <div className="App--searchbar">
+        <Route
+          exact
+          path="/"
+          render={routerProps => (
+            <div>
+            <div className="App--searchbar">
           <form onSubmit={e => this.handleSubmit(e)}>
             <input
               type="text"
@@ -146,16 +151,13 @@ class App extends Component {
             </button>
           </form>
         </div>
-        <Route
-          exact
-          path="/"
-          render={routerProps => (
             <Container
               className="Container--Map"
               {...this.state}
               handleLike={this.handleLike}
               {...routerProps}
             />
+            </div>
           )}
         />
         <Route
