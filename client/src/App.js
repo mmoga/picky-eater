@@ -109,19 +109,6 @@ class App extends Component {
     ];
     this.setState({ randomSelection: randomSelection });
     this.handlePopup(e);
-
-    // Right now, this will only display 'works' if the place drawn
-    // is liked. Not ideal as we need to run through only the
-    // liked places so it won't draw blanks
-    // maybe use a while loop
-    // const rand = this.state.businesses[
-    //   Math.floor(Math.random() * this.state.businesses.length)
-    // ];
-    // const randLiked = '';
-    // while (!rand.isLiked) {
-    //   randLiked = rand.
-    //   console.log("works");
-    // }
   };
 
   handlePopup = index => this.setState({ activePopup: index });
