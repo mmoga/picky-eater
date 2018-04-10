@@ -20,7 +20,8 @@ class App extends Component {
     searchTerm: "",
     businesses: [],
     marked: [],
-    activePopup: null
+    activePopup: null,
+    randomSelection: null
   };
 
   handleZipChange = e => {
@@ -55,20 +56,24 @@ class App extends Component {
     e.preventDefault();
     getBusinessInfo(this.state.searchTerm, this.state.lat, this.state.lng)
       .then(resp => {
-        const newBusinesses = resp.data.businesses.map((business, index) => ({
-          name: business.name,
-          lat: business.coordinates.latitude,
-          lng: business.coordinates.longitude,
-          id: business.id,
-          isLiked: null,
-          index: index
-        })).map(business => {
-          const foundIndex = this.state.marked.findIndex(m => m.id === business.id);
-          return {
-            ...business,
-            ...this.state.marked[foundIndex],
-          }
-        })
+        const newBusinesses = resp.data.businesses
+          .map((business, index) => ({
+            name: business.name,
+            lat: business.coordinates.latitude,
+            lng: business.coordinates.longitude,
+            id: business.id,
+            isLiked: null,
+            index: index
+          }))
+          .map(business => {
+            const foundIndex = this.state.marked.findIndex(
+              m => m.id === business.id
+            );
+            return {
+              ...business,
+              ...this.state.marked[foundIndex]
+            };
+          });
 
         this.setState({
           businesses: [...newBusinesses]
@@ -86,18 +91,23 @@ class App extends Component {
     const last = this.state.businesses.slice(index + 1);
     const newBusiness = [
       ...first,
-      {...likedPlace, isLiked:isLiked},
+      { ...likedPlace, isLiked: isLiked },
       ...last
     ];
     const newMarked = [
       ...this.state.marked,
-      {...likedPlace, isLiked:isLiked}
-    ]
-    this.setState({ businesses: newBusiness , marked: newMarked});
+      { ...likedPlace, isLiked: isLiked }
+    ];
+    this.setState({ businesses: newBusiness, marked: newMarked });
     console.log(likedPlace);
   };
 
   handlePickerClick = e => {
+    const selection = this.state.marked.filter(m => m.isLiked)
+    const randomSelection = selection[
+      Math.floor(Math.random() * selection.length)
+    ];
+    this.setState({ randomSelection: randomSelection });
     this.handlePopup(e);
 
     // Right now, this will only display 'works' if the place drawn
@@ -114,7 +124,7 @@ class App extends Component {
     // }
   };
 
-  handlePopup = (index) => this.setState({ activePopup: index })
+  handlePopup = index => this.setState({ activePopup: index });
 
   render() {
     // if (!this.props.loaded) {
@@ -122,46 +132,51 @@ class App extends Component {
     // }
     return (
       <div>
-        <PickerPopup isShown={this.state.activePopup}/>
+        <PickerPopup
+          isShown={this.state.activePopup}
+          onClose={() => this.handlePopup(false)}
+          onNext={this.handlePickerClick}
+          {...this.state.randomSelection}
+        />
         <Route
           exact
           path="/"
           render={routerProps => (
             <div>
-            <div className="App--searchbar">
-          <form onSubmit={e => this.handleSubmit(e)}>
-            <input
-              type="text"
-              maxLength="5"
-              value={this.state.zip}
-              onChange={this.handleZipChange}
-              placeholder="Enter zip code"
-            />
-            <button className="submit-btn" type="submit">
-              Set Location
-            </button>
-          </form>
-          <button onClick={this.geoLocate} className="geo-btn">
-            Use My Location
-          </button>
-          <form onSubmit={this.handleTermSearch}>
-            <input
-              type="text"
-              placeholder="Enter search term"
-              value={this.state.searchTerm}
-              onChange={this.handleTermChange}
-            />
-            <button className="submit-btn" type="submit">
-              Look it up!
-            </button>
-          </form>
-        </div>
-            <Container
-              className="Container--Map"
-              {...this.state}
-              handleLike={this.handleLike}
-              {...routerProps}
-            />
+              <div className="App--searchbar">
+                <form onSubmit={e => this.handleSubmit(e)}>
+                  <input
+                    type="text"
+                    maxLength="5"
+                    value={this.state.zip}
+                    onChange={this.handleZipChange}
+                    placeholder="Enter zip code"
+                  />
+                  <button className="submit-btn" type="submit">
+                    Set Location
+                  </button>
+                </form>
+                <button onClick={this.geoLocate} className="geo-btn">
+                  Use My Location
+                </button>
+                <form onSubmit={this.handleTermSearch}>
+                  <input
+                    type="text"
+                    placeholder="Enter search term"
+                    value={this.state.searchTerm}
+                    onChange={this.handleTermChange}
+                  />
+                  <button className="submit-btn" type="submit">
+                    Look it up!
+                  </button>
+                </form>
+              </div>
+              <Container
+                className="Container--Map"
+                {...this.state}
+                handleLike={this.handleLike}
+                {...routerProps}
+              />
             </div>
           )}
         />

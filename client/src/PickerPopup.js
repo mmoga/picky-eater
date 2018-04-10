@@ -11,13 +11,13 @@ class PickerPopup extends Component {
         }`}
       >
         <div className="PickerPopup--title">
-          <h1>Popup launched!</h1>
+          <h1>{this.props.name}</h1>
         </div>
         <div className="PickerPopup--btns">
-          <button onClick={() => console.log("do it over!")}>
+          <button onClick={this.props.onNext}>
             Eh... try it again
           </button>
-          <button onClick={() => console.log("close!")}>Close</button>
+          <button onClick={this.props.onClose}>Close</button>
         </div>
       </div>
     );
