@@ -1,9 +1,13 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+const mongoose = require('mongoose');
+
 
 require('dotenv').config();
-const { GOOGLE_API_KEY, YELP_API_KEY } = process.env;
+const { GOOGLE_API_KEY, YELP_API_KEY, MONGO_URI } = process.env;
+
+mongoose.connect(process.env.MONGO_URI);
 
 const serverApp = express();
 const port = process.env.PORT || 5000;
@@ -54,3 +58,4 @@ serverApp.get('*', (request, response) => {
 serverApp.listen(port, () => {
     console.log(`Now listening on port ${port}`);
 })
+
