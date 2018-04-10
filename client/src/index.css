@@ -166,7 +166,7 @@ input {
 }
 
 .PickerPopup--container {
-  display: flex;
+  text-align: center;
   background-color: lightgrey;
   color: black;
   position: fixed;
@@ -186,5 +186,20 @@ input {
 }
 
 .PickerPopup--container-shown {
-  display: flex;
+  display: block;
+}
+
+.PickerPopup--title {
+
+}
+
+.PickerPopup--btns {
+  display: inline-block;
+}
+
+.PickerPopup--btns button {
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-left: 10px;
 }
