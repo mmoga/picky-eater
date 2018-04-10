@@ -190,7 +190,13 @@ input {
 }
 
 .PickerPopup--title {
+  margin-top: 75px;
+}
 
+.PickerPopup--title h1 {
+  font-size: 5rem;
+  text-shadow: rgb(129, 51, 129) 0px 0px 10px;
+  color: #ffffff;
 }
 
 .PickerPopup--btns {
@@ -202,4 +208,15 @@ input {
   border-radius: 6px;
   font-size: 0.9rem;
   margin-left: 10px;
+}
+
+.PickerPopup--btns button:nth-child(1) {
+  background-color: rgb(252, 252, 209);
+}
+
+.PickerPopup--btns button:nth-child(2) {
+  background-color: #f67280;
+  color: #ffffff;
+  padding-right: 16px;
+  padding-left: 16px;
 }
