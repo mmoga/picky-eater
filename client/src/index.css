@@ -11,6 +11,9 @@ body {
   background-color: darkgray;
   display: flex;
   justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .App--navbar ul {
@@ -94,7 +97,7 @@ input {
 }
 
 .Map--sizing {
-  width: 80% !important;
+  width: 90% !important;
   margin: 0 auto;
   border-radius: 20px;
   border: 1px lightslategrey solid;
