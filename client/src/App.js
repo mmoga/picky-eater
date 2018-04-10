@@ -9,6 +9,7 @@ import {
 } from "./services/location";
 import Choices from "./Choices";
 import AntiChoices from "./AntiChoices";
+import PickerPopup from "./PickerPopup";
 
 class App extends Component {
   state = {
@@ -18,7 +19,8 @@ class App extends Component {
     zoom: 14,
     searchTerm: "",
     businesses: [],
-    marked: []
+    marked: [],
+    activePopup: null
   };
 
   handleZipChange = e => {
@@ -95,8 +97,8 @@ class App extends Component {
     console.log(likedPlace);
   };
 
-  handlePicker = e => {
-    // console.log('Launch popup!');
+  handlePickerClick = e => {
+    this.handlePopup(e);
 
     // Right now, this will only display 'works' if the place drawn
     // is liked. Not ideal as we need to run through only the
@@ -112,12 +114,15 @@ class App extends Component {
     // }
   };
 
+  handlePopup = (index) => this.setState({ activePopup: index })
+
   render() {
     // if (!this.props.loaded) {
     //   return <div>Loading...</div>
     // }
     return (
       <div>
+        <PickerPopup isShown={this.state.activePopup}/>
         <Route
           exact
           path="/"
@@ -178,7 +183,7 @@ class App extends Component {
               <Link to="/">Map</Link>
             </li>
             <li className="App--pick-btn">
-              <button onClick={this.handlePicker}>Pick for me!</button>
+              <button onClick={this.handlePickerClick}>Pick for me!</button>
             </li>
             <li>
               <Link to="/liked-places">Choices</Link>

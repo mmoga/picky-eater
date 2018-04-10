@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   background-color: rgb(241, 241, 241);
 }
 
@@ -27,7 +27,7 @@ body {
 }
 
 .App--navbar li:hover {
-  border-bottom: #C06C84 3px solid;
+  border-bottom: #c06c84 3px solid;
 }
 
 .App--navbar a {
@@ -41,7 +41,7 @@ body {
 
 .App--pick-btn button {
   padding: 10px;
-  background-color: #F67280;
+  background-color: #f67280;
   color: #ffffff;
   font-size: 1.4rem;
   border-radius: 6px;
@@ -59,8 +59,9 @@ body {
   margin-right: 10px;
 }
 
-.App--searchbar button, input {
-  font-family: 'Ubuntu', sans-serif;
+.App--searchbar button,
+input {
+  font-family: "Ubuntu", sans-serif;
 }
 
 .App--searchbar button {
@@ -74,7 +75,7 @@ body {
   margin-right: 30px;
   margin-left: 20px;
   padding: 8px;
-  background-color: #F67280;
+  background-color: #f67280;
   color: #ffffff;
   font-size: 1rem;
 }
@@ -83,8 +84,8 @@ body {
   height: 1.68em;
   font-size: 16px;
   border-radius: 6px;
-  border: #355C7D 1px solid;
-  background-color: #6C5B7B;
+  border: #355c7d 1px solid;
+  background-color: #6c5b7b;
   color: #fff;
 }
 
@@ -162,4 +163,28 @@ body {
 
 .Choices--item p:hover {
   border-bottom: rgb(129, 51, 129) 3px solid;
+}
+
+.PickerPopup--container {
+  display: flex;
+  background-color: lightgrey;
+  color: black;
+  position: fixed;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.PickerPopup--container-hidden {
+  display: none;
+}
+
+.PickerPopup--container-shown {
+  display: flex;
 }
