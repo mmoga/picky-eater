@@ -8,7 +8,7 @@ const markedSchema = new Schema({
     },
     lat: Number,
     lng: Number,
-    id: Number,
+    id: String,
     isLiked: {
         required: true,
         type: Boolean

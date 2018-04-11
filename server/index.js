@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 
 require('dotenv').config();
@@ -13,7 +14,8 @@ const serverApp = express();
 const port = process.env.PORT || 5000;
 
 const markedRouter = require('./routers/markedbusinesses');
-//middleware (powerups)
+serverApp.use(bodyParser.json());
+serverApp.use(bodyParser.urlencoded({ extended: true}));
 serverApp.use(express.static('client/build'));
 serverApp.use(markedRouter);
 

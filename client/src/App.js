@@ -96,12 +96,19 @@ class App extends Component {
       { ...likedPlace, isLiked: isLiked },
       ...last
     ];
-    const newMarked = [
-      ...this.state.marked,
-      { ...likedPlace, isLiked: isLiked }
-    ];
-    this.setState({ businesses: newBusiness, marked: newMarked });
+    
+    this.setState({ businesses: newBusiness });
     console.log(likedPlace);
+
+    axios.post('/markedbusiness', {...likedPlace, isLiked: isLiked})
+    .then(markedBusinesses => {
+      const newMarked = [
+        ...this.state.marked,
+        { ...likedPlace, isLiked: isLiked }
+      ];
+      this.setState({ marked: newMarked })
+    })
+    .catch()
   };
 
   handlePickerClick = e => {
