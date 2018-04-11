@@ -10,6 +10,7 @@ import {
 import Choices from "./Choices";
 import AntiChoices from "./AntiChoices";
 import PickerPopup from "./PickerPopup";
+import axios from 'axios';
 
 class App extends Component {
   state = {
@@ -83,7 +84,8 @@ class App extends Component {
         console.log(err);
       });
   };
-
+// this function below also needs to send the liked/disliked information
+// to the DB
   handleLike = (isLiked, index) => {
     console.log(index);
     const likedPlace = this.state.businesses[index];
@@ -112,6 +114,13 @@ class App extends Component {
   };
 
   handlePopup = index => this.setState({ activePopup: index });
+
+componentDidMount(){
+  axios.get('/markedbusiness')
+  .then(markedBusinesses => {
+    this.setState({marked: markedBusinesses.data.markedBusiness})
+  })
+}
 
   render() {
     // if (!this.props.loaded) {

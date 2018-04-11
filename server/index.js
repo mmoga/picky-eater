@@ -12,8 +12,10 @@ mongoose.connect(process.env.MONGO_URI);
 const serverApp = express();
 const port = process.env.PORT || 5000;
 
+const markedRouter = require('./routers/markedbusinesses');
 //middleware (powerups)
 serverApp.use(express.static('client/build'));
+serverApp.use(markedRouter);
 
 
 serverApp.get('/geocode/:zipcode', function(request, response) {
