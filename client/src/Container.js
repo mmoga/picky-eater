@@ -5,7 +5,7 @@ class Container extends Component {
   render() {
     const markers = this.props.businesses.map(business => (
       <Marker
-        key={business.id}
+        key={business.bid}
         position={[business.lat, business.lng]}
         isLiked={business.isLiked}
       >

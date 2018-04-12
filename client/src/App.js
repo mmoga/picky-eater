@@ -62,13 +62,13 @@ class App extends Component {
             name: business.name,
             lat: business.coordinates.latitude,
             lng: business.coordinates.longitude,
-            id: business.id,
+            bid: business.id,
             isLiked: null,
             index: index
           }))
           .map(business => {
             const foundIndex = this.state.marked.findIndex(
-              m => m.id === business.id
+              m => m.bid === business.bid
             );
             return {
               ...business,
@@ -100,10 +100,10 @@ class App extends Component {
     this.setState({ businesses: newBusiness });
     console.log(likedPlace);
 
-    axios.post('/markedbusiness', {...likedPlace, isLiked: isLiked})
+    axios.put('/markedbusiness', {...likedPlace, isLiked: isLiked})
     .then(markedBusinesses => {
       const newMarked = [
-        ...this.state.marked,
+        ...this.state.marked.filter(m => m.bid !== likedPlace.bid),
         { ...likedPlace, isLiked: isLiked }
       ];
       this.setState({ marked: newMarked })

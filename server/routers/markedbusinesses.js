@@ -15,26 +15,26 @@ router.get('/markedbusiness', (req, res, next) => {
     .catch(next)
 });
 
-router.post('/markedbusiness', (req,res, next) => {
+router.put('/markedbusiness', (req,res, next) => {
     // if(!req.body.name){
     //     next({msg: "bad request"})
     // }
-    const marked = new MarkedBusiness({
+    const marked = ({
         name: req.body.name,
-        id: req.body.id,
-        isLiked: req.body.isLiked,
+        bid: req.body.bid,
+        // isLiked: req.body.isLiked,
         lat: req.body.lat,
         lng: req.body.lng
     });
-    marked
-        .save()
-        .then(response => {
-            res.status(201).json({
-                msg: 'Successfully created product'
-            });
-        })
-        .catch(next);
+    MarkedBusiness.findOneAndUpdate(marked, 
+        {...marked, isLiked: req.body.isLiked}, { upsert: true, runValidators: true }, function (err, markedBusiness) {
+        if (err) return next(err);
+        res.status(201).json({
+            msg: 'Successfully created product'
+        });
+      });
 });
+
 
 
 

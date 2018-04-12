@@ -8,7 +8,7 @@ class Choices extends Component {
     const likedChoices = this.props.marked.map(
       business =>
         business.isLiked ? (
-          <div className="Choices--item" key={business.id}>
+          <div className="Choices--item" key={business._id || business.bid}>
             <p>{business.name}</p>
           </div>
         ) : (
